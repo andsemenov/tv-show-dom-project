@@ -9,10 +9,9 @@ function setup() {
   //makePageForEpisodes(oneShow);
 }
 
+//it renders page with episodes
 function makePageForEpisodes(episodeList) {
-  console.clear(); //////////////////////////////////////////////
   document.querySelector("#root").innerHTML = "";
-
   episodeList.forEach(renderEpisode);
 }
 
@@ -38,7 +37,6 @@ function searchEpisodes(episodeList, stringForSearch) {
       episode.summary.toUpperCase().includes(stringForSearch.toUpperCase())
     );
   });
-
   return searchingResult;
 }
 
@@ -58,6 +56,7 @@ function renderEpisode(episode) {
   //nested container for each episode in root div
   let divContainer = document.createElement("div");
   document.querySelector("#root").append(divContainer);
+  divContainer.className = "episode";
 
   //nested div for title of each episode
   let divTitle = document.createElement("div");

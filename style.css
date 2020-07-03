@@ -1,2 +1,14 @@
+* {
+  box-sizing: border-box;
+}
 #root {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.episode {
+  width: calc(100% / 3);
+  text-align: center;
+  padding-left: 2%;
+  padding-right: 2%;
 }
