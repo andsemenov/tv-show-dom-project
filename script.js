@@ -4,23 +4,14 @@ function setup() {
   fetchShow();
 }
 
-function fetchEpisodes(showID) {
-  fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
-    .then(function (result) {
-      return result.json();
-    })
-    .then(function (show) {
-      renderEpisodes(show);
-    });
-}
-
+//it fetches show list
 function fetchShow() {
   fetch("http://api.tvmaze.com/shows")
     .then(function (result) {
       return result.json();
     })
-    .then(function (episodeList) {
-      renderShowSelect(episodeList);
+    .then(function (showList) {
+      renderShowSelect(showList);
     });
 }
 
@@ -32,15 +23,37 @@ function renderShowSelect(show) {
     selectElement.value = show.id;
     selectElement.textContent = show.name;
   });
-  fetchEpisodes(show[0].id);
-  /*  document.querySelector("#choose_episode").addEventListener("change", () => {
+  fetchEpisodes(document.querySelector("#choose_show").value);
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  document.querySelector("#choose_show").addEventListener("change", () => {
     console.log(document.querySelector("#choose_show").value);
     fetchEpisodes(document.querySelector("#choose_show").value);
-  }); */
+  });
 }
 
-//it renders all elements on the page
+//it fetches episode list
+function fetchEpisodes(showID) {
+  fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
+    .then(function (result) {
+      return result.json();
+    })
+    .then(function (show) {
+      console.log(show);
+      renderEpisodes(show);
+      /////////////////////////////////////////////////////////////////////////////////////
+      // document.querySelector("#choose_show").addEventListener("change", () => {
+      //  console.log(document.querySelector("#choose_show").value);
+      //  fetchEpisodes(document.querySelector("#choose_show").value);
+      // });
+      ////////////////////////////////////////////////////////////////////////////////////////////
+    });
+}
+
+//it renders episode elements on the page
 function renderEpisodes(episodeList) {
+  //////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////////////////////////////////////
   makePageForEpisodes(episodeList);
   searchResultRender(episodeList);
   selectEpisode(episodeList);
@@ -102,19 +115,22 @@ function renderEpisode(episode) {
 
   //nested img of each episode
   let imgMedium = document.createElement("img");
-  divContainer.append(imgMedium);
   imgMedium.src = episode.image.medium;
+  divContainer.append(imgMedium);
 
   //nested summary paragraph for each episode
   let divSummary = document.createElement("div");
-  divContainer.append(divSummary);
+
   divSummary.innerHTML = episode.summary;
+  divContainer.append(divSummary);
 }
 
 //it renders select element on the page
 function selectEpisode(episodeList) {
+  document.querySelector("#choose_episode").innerHTML = ""; //////////////////////////////////////////////////////////////
   episodeList.forEach((episode) => {
     let selectElement = document.createElement("option");
+
     document.querySelector("#choose_episode").appendChild(selectElement);
     selectElement.value = `${episode.id}`;
     selectElement.textContent = `${
