@@ -1,12 +1,49 @@
 //You can edit ALL of the code here
-function setup() {
-  const allEpisodes = getAllEpisodes();
 
-  makePageForEpisodes(allEpisodes);
-  searchResultRender(allEpisodes);
-  //const oneShow = getOneShow();
-  //console.log(oneShow);
-  //makePageForEpisodes(oneShow);
+function setup() {
+  fetchShow();
+}
+
+function fetchEpisodes(showID) {
+  fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
+    .then(function (result) {
+      return result.json();
+    })
+    .then(function (show) {
+      renderEpisodes(show);
+    });
+}
+
+function fetchShow() {
+  fetch("http://api.tvmaze.com/shows")
+    .then(function (result) {
+      return result.json();
+    })
+    .then(function (episodeList) {
+      renderShowSelect(episodeList);
+    });
+}
+
+//it renders select of Show
+function renderShowSelect(show) {
+  show.forEach((show) => {
+    let selectElement = document.createElement("option");
+    document.querySelector("#choose_show").appendChild(selectElement);
+    selectElement.value = show.id;
+    selectElement.textContent = show.name;
+  });
+  fetchEpisodes(show[0].id);
+  /*  document.querySelector("#choose_episode").addEventListener("change", () => {
+    console.log(document.querySelector("#choose_show").value);
+    fetchEpisodes(document.querySelector("#choose_show").value);
+  }); */
+}
+
+//it renders all elements on the page
+function renderEpisodes(episodeList) {
+  makePageForEpisodes(episodeList);
+  searchResultRender(episodeList);
+  selectEpisode(episodeList);
 }
 
 //it renders page with episodes
@@ -40,17 +77,6 @@ function searchEpisodes(episodeList, stringForSearch) {
   return searchingResult;
 }
 
-//it makes unique code of each episode
-function settingCode(symbol, number) {
-  let code;
-  if (number < 10) {
-    code = `${symbol}0${number}`;
-  } else {
-    code = `${symbol}${number}`;
-  }
-  return code;
-}
-
 //it renders a container for episode's info
 function renderEpisode(episode) {
   //nested container for each episode in root div
@@ -71,7 +97,8 @@ function renderEpisode(episode) {
   let pCode = document.createElement("p");
   divTitle.append(pCode);
   pCode.textContent =
-    settingCode("s", episode.season) + settingCode("e", episode.number);
+    "S".concat(String(episode.season).padStart(2, 0)) +
+    "E".concat(String(episode.number).padStart(2, 0));
 
   //nested img of each episode
   let imgMedium = document.createElement("img");
@@ -82,6 +109,37 @@ function renderEpisode(episode) {
   let divSummary = document.createElement("div");
   divContainer.append(divSummary);
   divSummary.innerHTML = episode.summary;
+}
+
+//it renders select element on the page
+function selectEpisode(episodeList) {
+  episodeList.forEach((episode) => {
+    let selectElement = document.createElement("option");
+    document.querySelector("#choose_episode").appendChild(selectElement);
+    selectElement.value = `${episode.id}`;
+    selectElement.textContent = `${
+      "S".concat(String(episode.season).padStart(2, 0)) +
+      "E".concat(String(episode.number).padStart(2, 0))
+    } - ${episode.name}`;
+  });
+
+  document.querySelector("#choose_episode").addEventListener("change", () => {
+    searchedEpisode(
+      episodeList,
+      document.querySelector("#choose_episode").value
+    );
+  });
+}
+
+//it generates a page for episode
+function searchedEpisode(episodeList, code) {
+  document.location.href = "episode.html";
+
+  let currentEpisode = episodeList.find((element) => {
+    return element.id == code;
+  });
+
+  console.log(currentEpisode);
 }
 
 window.onload = setup;

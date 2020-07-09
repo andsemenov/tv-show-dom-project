@@ -9,8 +9,24 @@
   </head>
 
   <body>
-    <input type="text" id="search" />
-    <label for="search"></label>
+    <div class="search">
+      <ul>
+        <li>
+          <label for="choose_serial">Choose an serial</label>
+          <select name="select" id="choose_show"> </select>
+        </li>
+        <li>
+          <label for="choose_episode">Choose an episode</label>
+          <select name="select" id="choose_episode">
+            <option value="">Choose an episode</option>
+          </select>
+        </li>
+        <li>
+          <input type="text" id="search" placeholder="Search episodes" />
+          <label for="search"></label>
+        </li>
+      </ul>
+    </div>
 
     <div id="root"></div>
 
