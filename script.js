@@ -67,7 +67,7 @@ function makePageForEpisodes(episodeList) {
 
 // it renders searched episodes and counter of episodes
 function searchResultRender(episodeList) {
-  let counterEpisodes = document.querySelector("#search + label");
+  let counterEpisodes = document.querySelector("#counter");
   counterEpisodes.textContent = `Displaying
   ${episodeList.length}/${episodeList.length} episodes`;
   document.querySelector("#search").addEventListener("input", () => {
@@ -149,7 +149,9 @@ function selectEpisode(episodeList) {
 
 //it generates a page for episode
 function searchedEpisode(episodeList, code) {
-  document.location.href = "episode.html";
+  //document.location.href = "episode.html";
+  var w = window.open("");
+  w.document.writeln("episode.html");
 
   let currentEpisode = episodeList.find((element) => {
     return element.id == code;
