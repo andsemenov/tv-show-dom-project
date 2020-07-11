@@ -1,5 +1,4 @@
 //You can edit ALL of the code here
-
 function setup() {
   fetchShow();
 }
@@ -38,7 +37,6 @@ function fetchEpisodes(showID) {
       return result.json();
     })
     .then(function (show) {
-      console.log(show);
       renderEpisodes(show);
       /////////////////////////////////////////////////////////////////////////////////////
       // document.querySelector("#choose_show").addEventListener("change", () => {
@@ -149,15 +147,14 @@ function selectEpisode(episodeList) {
 
 //it generates a page for episode
 function searchedEpisode(episodeList, code) {
-  //document.location.href = "episode.html";
-  var w = window.open("");
-  w.document.writeln("episode.html");
-
   let currentEpisode = episodeList.find((element) => {
     return element.id == code;
   });
-
   console.log(currentEpisode);
+  //////////////////////////////////////////////
+  //localStorage.setItem("currentEpisode", JSON.stringify(currentEpisode));
+  sessionStorage.setItem("currentEpisode", JSON.stringify(currentEpisode));
+  document.location.href = "episode.html";
 }
 
 window.onload = setup;

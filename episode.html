@@ -6,11 +6,22 @@
     <title>TV Show Project | My Name andsemenov</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="episode.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div id="episode_page"></div>
-
-    <script src="script.js"></script>
+    <div id="page">
+      <div id="episode">
+        <h1 id="name"></h1>
+        <div id="season_number">
+          <h2 id="season"></h2>
+          <h2 id="number"></h2>
+        </div>
+        <img id="photo" src="" alt="Episode's photo" />
+        <p id="summary"></p>
+      </div>
+      <a class="button" href="index.html">Return to main page</a>
+    </div>
+    <script src="episode.js"></script>
   </body>
 </html>
