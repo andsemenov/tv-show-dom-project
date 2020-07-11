@@ -5,7 +5,7 @@ function setup() {
 
 //it fetches show list
 function fetchShow() {
-  fetch("http://api.tvmaze.com/shows")
+  fetch("https://api.tvmaze.com/shows")
     .then(function (result) {
       return result.json();
     })
