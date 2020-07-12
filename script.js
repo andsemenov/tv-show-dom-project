@@ -129,7 +129,7 @@ function selectEpisode(episodeList) {
     } - ${episode.name}`;
   });
 
-  document.querySelector("#choose_episode").addEventListener("click", () => {
+  document.querySelector("#choose_episode").addEventListener("change", () => {
     searchedEpisode(
       episodeList,
       document.querySelector("#choose_episode").value
