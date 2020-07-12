@@ -1,0 +1,14 @@
+#wrap {
+  text-align: center;
+}
+
+#summary {
+  text-align: start;
+  display: inline-block;
+}
+
+@media screen and (max-width: 650px) {
+  #photo {
+    max-width: 90%;
+  }
+}

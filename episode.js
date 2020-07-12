@@ -11,8 +11,8 @@ function putStoredEpisode(string) {
 //it renders all DOM elements on the page
 function renderEpisodePage(episode) {
   document.querySelector("#name").textContent = episode.name;
-  document.querySelector("#season").textContent = episode.season;
-  document.querySelector("#number").textContent = episode.number;
+  document.querySelector("#season").textContent = `Season: ${episode.season}`;
+  document.querySelector("#number").textContent = `Number: ${episode.number}`;
   document.querySelector("#photo").src = episode.image.original;
   document.querySelector("#summary").innerHTML = episode.summary;
 }

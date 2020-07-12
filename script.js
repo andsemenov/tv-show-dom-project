@@ -23,7 +23,6 @@ function renderShowSelect(show) {
     selectElement.textContent = show.name;
   });
   fetchEpisodes(document.querySelector("#choose_show").value);
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   document.querySelector("#choose_show").addEventListener("change", () => {
     console.log(document.querySelector("#choose_show").value);
     fetchEpisodes(document.querySelector("#choose_show").value);
@@ -38,20 +37,11 @@ function fetchEpisodes(showID) {
     })
     .then(function (show) {
       renderEpisodes(show);
-      /////////////////////////////////////////////////////////////////////////////////////
-      // document.querySelector("#choose_show").addEventListener("change", () => {
-      //  console.log(document.querySelector("#choose_show").value);
-      //  fetchEpisodes(document.querySelector("#choose_show").value);
-      // });
-      ////////////////////////////////////////////////////////////////////////////////////////////
     });
 }
 
 //it renders episode elements on the page
 function renderEpisodes(episodeList) {
-  //////////////////////////////////////////////////////////////////////////////
-
-  //////////////////////////////////////////////////////////////////
   makePageForEpisodes(episodeList);
   searchResultRender(episodeList);
   selectEpisode(episodeList);
@@ -70,7 +60,7 @@ function searchResultRender(episodeList) {
   ${episodeList.length}/${episodeList.length} episodes`;
   document.querySelector("#search").addEventListener("input", () => {
     let stringSearch = document.querySelector("#search").value;
-    document.querySelector("#search + label").textContent = `Displaying ${
+    document.querySelector("#counter").textContent = `Displaying ${
       searchEpisodes(episodeList, stringSearch).length
     }/${episodeList.length} episodes`;
     makePageForEpisodes(searchEpisodes(episodeList, stringSearch));
@@ -103,29 +93,31 @@ function renderEpisode(episode) {
   let pName = document.createElement("p");
   divTitle.append(pName);
   pName.textContent = episode.name;
-
+  pName.className = "name";
   //nested code of episode
   let pCode = document.createElement("p");
   divTitle.append(pCode);
+  pCode.className = "code";
   pCode.textContent =
     "S".concat(String(episode.season).padStart(2, 0)) +
     "E".concat(String(episode.number).padStart(2, 0));
 
   //nested img of each episode
   let imgMedium = document.createElement("img");
+  imgMedium.className = "image";
   imgMedium.src = episode.image.medium;
   divContainer.append(imgMedium);
 
   //nested summary paragraph for each episode
   let divSummary = document.createElement("div");
-
+  divSummary.className = "summary";
   divSummary.innerHTML = episode.summary;
   divContainer.append(divSummary);
 }
 
 //it renders select element on the page
 function selectEpisode(episodeList) {
-  document.querySelector("#choose_episode").innerHTML = ""; //////////////////////////////////////////////////////////////
+  document.querySelector("#choose_episode").innerHTML = "";
   episodeList.forEach((episode) => {
     let selectElement = document.createElement("option");
 
@@ -137,7 +129,7 @@ function selectEpisode(episodeList) {
     } - ${episode.name}`;
   });
 
-  document.querySelector("#choose_episode").addEventListener("change", () => {
+  document.querySelector("#choose_episode").addEventListener("click", () => {
     searchedEpisode(
       episodeList,
       document.querySelector("#choose_episode").value
@@ -145,14 +137,13 @@ function selectEpisode(episodeList) {
   });
 }
 
-//it generates a page for episode
+//it generates a page for episode and saved finded object for page episode.html
 function searchedEpisode(episodeList, code) {
   let currentEpisode = episodeList.find((element) => {
     return element.id == code;
   });
   console.log(currentEpisode);
-  //////////////////////////////////////////////
-  //localStorage.setItem("currentEpisode", JSON.stringify(currentEpisode));
+
   sessionStorage.setItem("currentEpisode", JSON.stringify(currentEpisode));
   document.location.href = "episode.html";
 }
