@@ -10,6 +10,14 @@ function fetchShow() {
       return result.json();
     })
     .then(function (showList) {
+      //it sorts array showList alphabetically
+      showList = showList.sort(function (a, b) {
+        if (a.name < b.name) return -1;
+        else if (a.name > b.name) return 1;
+        return 0;
+      });
+
+      ///////////////////////////////////////////////////////
       renderShowSelect(showList);
     });
 }
@@ -104,8 +112,8 @@ function renderEpisode(episode) {
 
   //nested img of each episode
   let imgMedium = document.createElement("img");
-  imgMedium.className = "image";
   imgMedium.src = episode.image.medium;
+  imgMedium.className = "image";
   divContainer.append(imgMedium);
 
   //nested summary paragraph for each episode
@@ -128,8 +136,8 @@ function selectEpisode(episodeList) {
       "E".concat(String(episode.number).padStart(2, 0))
     } - ${episode.name}`;
   });
-
-  document.querySelector("#choose_episode").addEventListener("change", () => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  document.querySelector("#choose_episode").addEventListener("click", () => {
     searchedEpisode(
       episodeList,
       document.querySelector("#choose_episode").value
@@ -137,15 +145,24 @@ function selectEpisode(episodeList) {
   });
 }
 
-//it generates a page for episode and saved finded object for page episode.html
+//it generates a page for episode and saved founded object for page episode.html
 function searchedEpisode(episodeList, code) {
-  let currentEpisode = episodeList.find((element) => {
+  let index = episodeList.findIndex((element) => {
     return element.id == code;
   });
-  console.log(currentEpisode);
+  /*  console.log(index);
+  episodeList = episodeList.filter((episode) => episode.id != code); */
 
-  sessionStorage.setItem("currentEpisode", JSON.stringify(currentEpisode));
-  document.location.href = "episode.html";
+  document.querySelector("#search_word").classList.add("hidden");
+  document
+    .querySelectorAll(".episode")
+    .forEach((element) => element.classList.add("hidden"));
+  document
+    .querySelector(".episode:nth-child(" + (index + 1) + ")")
+    .classList.remove("hidden");
+  /* document
+    .querySelector("#root")
+    .prepend(document.querySelector(".episode:nth-child(" + (index + 1) + ")")); */
 }
 
 window.onload = setup;
