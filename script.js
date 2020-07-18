@@ -137,14 +137,12 @@ function selectEpisode(episodeList) {
     } - ${episode.name}`;
   });
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  document
-    .querySelector("#choose_episode")
-    .addEventListener("mousedown", () => {
-      searchedEpisode(
-        episodeList,
-        document.querySelector("#choose_episode").value
-      );
-    });
+  document.querySelector("#choose_episode").addEventListener("click", () => {
+    searchedEpisode(
+      episodeList,
+      document.querySelector("#choose_episode").value
+    );
+  });
 }
 
 //it generates a page for episode and saved founded object for page episode.html
