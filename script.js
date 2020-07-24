@@ -9,9 +9,6 @@ function setup() {
 //it fetches show list
 function fetchShow() {
   return (allShows = getAllShows());
-
-  //sortArray(allShows);
-  //renderShowSelect(allShows);
 }
 
 //it renders page with shows
@@ -41,6 +38,7 @@ function renderShow(showList) {
   let h1ShowName = document.createElement("h1");
   divForEachShow.appendChild(h1ShowName);
   h1ShowName.textContent = showList.name;
+  h1ShowName.className = "link-to-episode";
 
   let divForContentShow = document.createElement("div");
   divForEachShow.appendChild(divForContentShow);
@@ -71,6 +69,11 @@ function renderShow(showList) {
   let liRuntimeShow = document.createElement("li");
   ulForShow.appendChild(liRuntimeShow);
   liRuntimeShow.textContent = showList.runtime;
+
+  h1ShowName.addEventListener("click", () => {
+    console.log(showList.id); ///////////////////////////////////////
+    fetchEpisodes(showList.id);
+  });
 }
 
 //it renders search panel for all shows
@@ -116,12 +119,10 @@ function renderSearchShow(shows) {
 
   //makeListSelectShow(shows);
   /*   shows = sortArray(shows);
-
   document.querySelector("#root").innerHTML = "";
   shows.forEach((element) => {
     ///////////////////////////////////////////////////////////////////////////////
     let selectShows = document.createElement("option");
-
     document.querySelector("#select-show").appendChild(selectShows);
     selectShows.value = element.id;
     selectShows.textContent = element.name;
@@ -139,7 +140,7 @@ function renderSearchShow(shows) {
     makeListSelectShow(searched);
 
     //////////////////////////////////////////////////////////////////////////////
-    //
+
     /////////////////////////////////////////////////////////////////////////////////////
   });
 }
@@ -154,11 +155,23 @@ function makeListSelectShow(shows) {
 
 function renderListSelectShow(shows) {
   sortArray(shows).forEach((element) => {
-    ///////////////////////////////////////////////////////////////////////////////
     renderList(element);
   });
 
   console.log("ttt", shows);
+
+  //it expects a choice in List of shows
+  document.querySelector("#select-show").addEventListener("change", () => {
+    /*  searchedEpisode(
+      episodeList,
+      document.querySelector("#choose_episode").value
+    ); */
+
+    //sortArray(allShows);
+    //renderShowSelect(allShows);
+
+    console.log("***");
+  });
 }
 
 function renderList(element) {
@@ -167,14 +180,16 @@ function renderList(element) {
   document.querySelector("#select-show").appendChild(selectShows);
   selectShows.value = element.id;
   selectShows.textContent = element.name;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 /* shows = sortArray(shows);
-
 //document.querySelector("#root").innerHTML = "";
 shows.forEach((element) => {
   ///////////////////////////////////////////////////////////////////////////////
   let selectShows = document.createElement("option");
-
   document.querySelector("#select-show").appendChild(selectShows);
   selectShows.value = element.id;
   selectShows.textContent = element.name;
@@ -192,9 +207,7 @@ shows.forEach((element) => {
 /* function fu() {
   document.querySelector("#search_item_show").addEventListener("input", () => {
     let searchItem = document.querySelector("#search_item_show").value;
-
     //makePageForShows(searchEpisodes(episodeList, searchItem));
-
     console.log(searchItem);
   });
 } */

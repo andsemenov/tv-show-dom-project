@@ -59,6 +59,18 @@
   padding-top: 12px;
   padding-bottom: 12px;
 }
+
+.link-to-episode {
+  color: #800080;
+}
+.link-to-episode:visited {
+  color: #800080;
+}
+.link-to-episode:hover {
+  color: #800000;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 850px) {
   #root {
     margin: auto;
