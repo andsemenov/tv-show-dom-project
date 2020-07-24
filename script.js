@@ -82,7 +82,7 @@ function renderSearchShow(shows) {
   //elements search items
   let searchItemsShow = document.createElement("div");
   searchItemsShow.className = "search_show";
-  document.querySelector(".search").appendChild(searchItemsShow);
+  document.querySelector("#search_root").appendChild(searchItemsShow); /////111111111111111111
 
   let labelSearchItemsShow = document.createElement("label");
 
@@ -102,7 +102,7 @@ function renderSearchShow(shows) {
 
   let selectSearchedShow = document.createElement("div");
   selectSearchedShow.className = "select_show";
-  document.querySelector(".search").appendChild(selectSearchedShow);
+  document.querySelector("#search_root").appendChild(selectSearchedShow); /////111111111111111111
 
   let labelSelectShow = document.createElement("label");
   labelSelectShow.id = "counter_shows";

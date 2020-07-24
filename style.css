@@ -23,7 +23,7 @@
   width: auto;
 }
 
-.search {
+#search_root {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
