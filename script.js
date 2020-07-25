@@ -44,7 +44,7 @@ function renderShow(showList) {
 
   let imgForShow = document.createElement("img");
   divForEachShow.appendChild(imgForShow);
-  //imgForShow.src = showList.image.medium; ///////////////////////////////////////////////////////////////////////////////
+  imgForShow.src = showList.image.medium; ///////////////////////////////////////////////////////////////////////////////
 
   let divForSummary = document.createElement("div");
   divForEachShow.appendChild(divForSummary);
@@ -72,6 +72,7 @@ function renderShow(showList) {
   h1ShowName.addEventListener("click", () => {
     renderSearchPanelForEpisodes();
     fetchEpisodes(showList.id);
+    console.log(getAllShows());
   });
 }
 
@@ -92,6 +93,7 @@ function renderSearchShow(shows) {
   inputSearchItemsShow.id = "search_item_show";
   inputSearchItemsShow.type = "text";
   inputSearchItemsShow.placeholder = "Filtering for";
+  inputSearchItemsShow.className = "search";
 
   labelSearchItemsShow.textContent = "Filtering for";
   labelSearchItemsShow.htmlFor = "search_item_show";
@@ -206,27 +208,13 @@ function renderSearchPanelForEpisodes() {
   divForSearchItems.appendChild(inputForSearchItems);
   inputForSearchItems.type = "text";
   inputForSearchItems.id = "search";
+  inputForSearchItems.className = "search";
   inputForSearchItems.placeholder = "Search episodes";
 
   let counterForSearchItems = document.createElement("span");
   divForSearchItems.appendChild(counterForSearchItems);
   counterForSearchItems.id = "counter";
 }
-
-/* //it renders select of Show
-function renderShowSelect(allShows) {
-  allShows.forEach((element) => {
-    let selectElement = document.createElement("option");
-    document.querySelector("#choose_show").appendChild(selectElement);
-    selectElement.value = element.id;
-    selectElement.textContent = element.name;
-  });
-  fetchEpisodes(document.querySelector("#choose_show").value);
-
-  document.querySelector("#choose_show").addEventListener("change", () => {
-    fetchEpisodes(document.querySelector("#choose_show").value);
-  });
-} */
 
 //it sorts array alphabetically
 function sortArray(array) {
@@ -337,7 +325,7 @@ function selectEpisode(episodeList) {
       "E".concat(String(episode.number).padStart(2, 0))
     } - ${episode.name}`;
   });
-  //it waits when episode will be selected
+  //it waits when episode will be selected/////////////////////////////////////////////////////////////////////////////////
   document.querySelector("#choose_episode").addEventListener("change", () => {
     searchedEpisode(
       episodeList,
