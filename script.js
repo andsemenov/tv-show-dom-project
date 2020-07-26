@@ -346,7 +346,7 @@ function searchedEpisode(episodeList, code) {
     return element.id == code;
   });
 
-  document.querySelector("#search").classList.add("hidden");
+  //document.querySelector("#search").classList.add("hidden");
   document
     .querySelectorAll(".episode")
     .forEach((element) => element.classList.add("hidden"));
@@ -368,12 +368,12 @@ function searchedEpisode(episodeList, code) {
     element.addEventListener("click", () => {
       element.parentNode.removeChild(element);
 
-      document.querySelector("#search").classList.remove("hidden");
+      // document.querySelector("#search").classList.remove("hidden");
       document
         .querySelectorAll(".episode.hidden")
         .forEach((element) => element.classList.remove("hidden"));
       document.querySelector("#choose_episode").value = episodeList[0].id;
-      document.querySelector("#search_root").scrollIntoView();
+      document.querySelector("#search").scrollIntoView();
     })
   );
 }
