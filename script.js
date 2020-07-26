@@ -1,13 +1,12 @@
 //You can edit ALL of the code here
 function setup() {
   let allShows = fetchShow();
-
   renderSearchShow(allShows);
   makeListSelectShow(allShows);
   makePageForShows(allShows);
 }
 
-//it fetches show list
+//it fetches show list and sorts it
 function fetchShow() {
   allShows = getAllShows();
   return sortArray(allShows);
@@ -15,18 +14,22 @@ function fetchShow() {
 
 //it renders page with shows
 function makePageForShows(shows) {
+  renderCounter(shows);
+  renderItems(shows, renderShow);
+}
+
+//it renders counter with amount of shows
+function renderCounter(shows) {
   document.querySelector("#root").innerHTML = "";
-  //shows = sortArray(shows);
   document.querySelector(
     "#counter_shows"
   ).textContent = `Found ${shows.length} shows`;
-  renderShowList(shows);
 }
 
-//it renders all shows on page
-function renderShowList(shows) {
+//it renders all shows on page TOGETHER
+function renderItems(shows, render) {
   shows.forEach((element) => {
-    renderShow(element);
+    render(element);
   });
 }
 
@@ -87,6 +90,7 @@ function checkIfNullImage(show, link) {
 //it renders search panel for all shows
 function renderSearchShow(shows) {
   //elements search items
+
   let searchItemsShow = document.createElement("div");
   searchItemsShow.className = "search_show";
   document.querySelector("#search_root").appendChild(searchItemsShow); /////111111111111111111
@@ -134,26 +138,30 @@ function renderSearchShow(shows) {
   });
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //it renders page with shows
 function makeListSelectShow(shows) {
   document.querySelector("#select-show").innerHTML = "";
-  //shows = sortArray(shows);
-
-  renderShowSelect(shows);
-}
-
-//it renders all shows on page
-function renderShowSelect(shows) {
-  shows.forEach((element) => {
-    renderSelect(element);
-  });
+  // renderShowSelect(shows);
+  renderItems(shows, renderSelect);
   document.querySelector("#select-show").addEventListener("change", () => {
     let showID = document.querySelector("#select-show").value;
     renderSearchPanelForEpisodes();
     fetchEpisodes(showID);
   });
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//it renders all shows on page
+/* function renderShowSelect(shows) {
+  shows.forEach((element) => {
+    renderSelect(element);
+  });
+
+  document.querySelector("#select-show").addEventListener("change", () => {
+    let showID = document.querySelector("#select-show").value;
+    renderSearchPanelForEpisodes();
+    fetchEpisodes(showID);
+  });
+} */
 
 function renderSelect(show) {
   ///////////////////////////////////////////
