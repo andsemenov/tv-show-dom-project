@@ -77,9 +77,6 @@ function renderShow(showList) {
   h1ShowName.addEventListener("click", () => {
     renderSearchPanelForEpisodes();
     fetchEpisodes(showList.id);
-
-    console.log(fetchShow());
-    console.log(getAllShows());
   });
 }
 
@@ -364,6 +361,7 @@ function searchedEpisode(episodeList, code) {
   document
     .querySelector(".episode:nth-child(" + (index + 1) + ")")
     .append(buttonReturnEpisodes);
+
   document.querySelectorAll(".button_return_episodes").forEach((element) =>
     element.addEventListener("click", () => {
       element.parentNode.removeChild(element);
@@ -372,8 +370,8 @@ function searchedEpisode(episodeList, code) {
       document
         .querySelectorAll(".episode.hidden")
         .forEach((element) => element.classList.remove("hidden"));
-      document.querySelector("#choose_episode").value = episodeList[0].id;
-      document.querySelector("#search").scrollIntoView();
+      // document.querySelector("#choose_episode").value = episodeList[0].id;
+      document.querySelector("body").scrollIntoView();
     })
   );
 }
