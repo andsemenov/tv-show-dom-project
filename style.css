@@ -71,6 +71,10 @@
   text-decoration: underline;
 }
 
+.displaynone {
+  display: none;
+}
+
 @media screen and (max-width: 850px) {
   #root {
     margin: auto;
