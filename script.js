@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 function setup() {
   let allShows = fetchShow();
-  //allShows = sortArray(allShows);
+  // allShows = sortArray(allShows);
   renderSearchShow(allShows);
   makeListSelectShow(allShows);
   makePageForShows(allShows);
@@ -9,13 +9,14 @@ function setup() {
 
 //it fetches show list
 function fetchShow() {
-  return (allShows = getAllShows());
+  allShows = getAllShows();
+  return sortArray(allShows);
 }
 
 //it renders page with shows
 function makePageForShows(shows) {
   document.querySelector("#root").innerHTML = "";
-  shows = sortArray(shows);
+  //shows = sortArray(shows);
   document.querySelector(
     "#counter_shows"
   ).textContent = `Found ${shows.length} shows`;
@@ -44,7 +45,8 @@ function renderShow(showList) {
 
   let imgForShow = document.createElement("img");
   divForEachShow.appendChild(imgForShow);
-  imgForShow.src = showList.image.medium; ///////////////////////////////////////////////////////////////////////////////
+  //checks if image is null and replaces for spare one
+  imgForShow.src = checkIfNullImage(showList, "./src/show_noimage.jpg");
 
   let divForSummary = document.createElement("div");
   divForEachShow.appendChild(divForSummary);
@@ -74,6 +76,12 @@ function renderShow(showList) {
     fetchEpisodes(showList.id);
     console.log(getAllShows());
   });
+}
+
+// checks if image is NULL, replaces for spare
+function checkIfNullImage(show, link) {
+  if (show.image == null) return link;
+  return show.image.medium;
 }
 
 //it renders search panel for all shows
@@ -130,7 +138,7 @@ function renderSearchShow(shows) {
 //it renders page with shows
 function makeListSelectShow(shows) {
   document.querySelector("#select-show").innerHTML = "";
-  shows = sortArray(shows);
+  //shows = sortArray(shows);
 
   renderShowSelect(shows);
 }
@@ -301,7 +309,9 @@ function renderEpisode(episode) {
 
   //nested img of each episode
   let imgMedium = document.createElement("img");
-  imgMedium.src = episode.image.medium;
+
+  //checks if image is null and replaces for spare one
+  imgMedium.src = checkIfNullImage(episode, "./src/episode_noimage.jpg");
   imgMedium.className = "image";
   divContainer.append(imgMedium);
 
