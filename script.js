@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 function setup() {
   let allShows = fetchShow();
-  // allShows = sortArray(allShows);
+
   renderSearchShow(allShows);
   makeListSelectShow(allShows);
   makePageForShows(allShows);
