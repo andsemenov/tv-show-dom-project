@@ -88,11 +88,13 @@ function checkIfNullImage(show, link) {
 
 //it renders search panel for all shows
 function renderSearchShow(shows) {
+  let divSearchRoot = document.querySelector("#search_root");
   //elements search items
 
   let searchItemsShow = document.createElement("div");
-  searchItemsShow.className = "search_show";
-  document.querySelector("#search_root").appendChild(searchItemsShow); /////111111111111111111
+  searchItemsShow.className = "search_item";
+  searchItemsShow.id = "search_show";
+  divSearchRoot.appendChild(searchItemsShow); /////111111111111111111
 
   let labelSearchItemsShow = document.createElement("label");
 
@@ -112,7 +114,7 @@ function renderSearchShow(shows) {
   //elements select items
 
   let selectSearchedShow = document.createElement("div");
-  selectSearchedShow.className = "select_show";
+  selectSearchedShow.className = "search_item";
   document.querySelector("#search_root").appendChild(selectSearchedShow); /////111111111111111111
 
   let labelSelectShow = document.createElement("label");
@@ -128,58 +130,8 @@ function renderSearchShow(shows) {
   selectSelectShow.name = "select";
   labelSelectShow.htmlFor = "select-show";
 
-  document.querySelector("#search_item_show").addEventListener("input", () => {
-    let searchItem = document.querySelector("#search_item_show").value;
-    console.log(searchEpisodes(shows, searchItem));
-    let searched = searchEpisodes(shows, searchItem);
-    makePageForShows(searched);
-    makeListSelectShow(searched);
-  });
-}
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
-//it renders page with shows
-function makeListSelectShow(shows) {
-  document.querySelector("#select-show").innerHTML = "";
-
-  renderItems(shows, renderSelect);
-
-  document.querySelector("#select-show").addEventListener("change", () => {
-    let showID = document.querySelector("#select-show").value;
-    renderSearchPanelForEpisodes();
-    fetchEpisodes(showID);
-  });
-}
-
-function renderSelect(show) {
-  let selectShows = document.createElement("option");
-
-  document.querySelector("#select-show").appendChild(selectShows);
-  selectShows.value = show.id;
-  selectShows.textContent = show.name;
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function renderSearchPanelForEpisodes() {
-  //document.querySelector("#search_root").innerHTML = "";
-  document.querySelector(".search_show").style.display = "none";
-
-  let divSearchRoot = document.querySelector("#search_root");
-  //it creates a select element with list of shows
-  /* let divChooseShow = document.createElement("div");
-  divChooseShow.className = "search_item";
-  divSearchRoot.appendChild(divChooseShow);
-
-  let labelForChooseShow = document.createElement("label");
-  divChooseShow.appendChild(labelForChooseShow);
-  labelForChooseShow.textContent = "Choose a show";
-  labelForChooseShow.htmlFor = "choose_show";
-
-  let selectForChooseShow = document.createElement("select");
-  divChooseShow.appendChild(selectForChooseShow);
-  selectForChooseShow.className = "select";
-  selectForChooseShow.name = "select";
-  selectForChooseShow.id = "choose_show"; */
-
-  //it creates a select element with list of episodes
   let divForChooseEpisode = document.createElement("div");
   divSearchRoot.appendChild(divForChooseEpisode);
   divForChooseEpisode.className = "search_item";
@@ -215,6 +167,95 @@ function renderSearchPanelForEpisodes() {
   let counterForSearchItems = document.createElement("span");
   divForSearchItems.appendChild(counterForSearchItems);
   counterForSearchItems.id = "counter";
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  document.querySelector("#search_item_show").addEventListener("input", () => {
+    let searchItem = document.querySelector("#search_item_show").value;
+    let searched = searchEpisodes(shows, searchItem);
+    makePageForShows(searched);
+    makeListSelectShow(searched);
+  });
+}
+
+//it renders page with shows
+function makeListSelectShow(shows) {
+  document.querySelector("#select-show").innerHTML = "";
+
+  renderItems(shows, renderSelect);
+
+  document.querySelector("#select-show").addEventListener("change", () => {
+    let showID = document.querySelector("#select-show").value;
+    renderSearchPanelForEpisodes();
+    fetchEpisodes(showID);
+  });
+}
+
+function renderSelect(show) {
+  let selectShows = document.createElement("option");
+
+  document.querySelector("#select-show").appendChild(selectShows);
+  selectShows.value = show.id;
+  selectShows.textContent = show.name;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function renderSearchPanelForEpisodes() {
+  //document.querySelector("#search_root").innerHTML = "";
+  document.querySelector("#search_show").style.display = "none";
+
+  let divSearchRoot = document.querySelector("#search_root");
+  //it creates a select element with list of shows
+  /* let divChooseShow = document.createElement("div");
+  divChooseShow.className = "search_item";
+  divSearchRoot.appendChild(divChooseShow);
+
+  let labelForChooseShow = document.createElement("label");
+  divChooseShow.appendChild(labelForChooseShow);
+  labelForChooseShow.textContent = "Choose a show";
+  labelForChooseShow.htmlFor = "choose_show";
+
+  let selectForChooseShow = document.createElement("select");
+  divChooseShow.appendChild(selectForChooseShow);
+  selectForChooseShow.className = "select";
+  selectForChooseShow.name = "select";
+  selectForChooseShow.id = "choose_show"; */
+
+  //it creates a select element with list of episodes
+  /* let divForChooseEpisode = document.createElement("div");
+  divSearchRoot.appendChild(divForChooseEpisode);
+  divForChooseEpisode.className = "search_item";
+
+  let labelForChooseEpisode = document.createElement("label");
+  divForChooseEpisode.appendChild(labelForChooseEpisode);
+  labelForChooseEpisode.htmlFor = "choose_episode";
+  labelForChooseEpisode.textContent = "Choose an episode";
+
+  let selectForChooseEpisode = document.createElement("select");
+  divForChooseEpisode.appendChild(selectForChooseEpisode);
+  selectForChooseEpisode.className = "select";
+  selectForChooseEpisode.name = "select";
+  selectForChooseEpisode.id = "choose_episode";
+
+  //it creates an input element for searching among episodes
+  let divForSearchItems = document.createElement("div");
+  divForSearchItems.className = "search_item";
+  divSearchRoot.appendChild(divForSearchItems);
+
+  let labelForSearchItems = document.createElement("label");
+  divForSearchItems.appendChild(labelForSearchItems);
+  labelForSearchItems.htmlFor = "search";
+  labelForSearchItems.textContent = "Search episodes";
+
+  let inputForSearchItems = document.createElement("input");
+  divForSearchItems.appendChild(inputForSearchItems);
+  inputForSearchItems.type = "text";
+  inputForSearchItems.id = "search";
+  inputForSearchItems.className = "search";
+  inputForSearchItems.placeholder = "Search episodes";
+
+  let counterForSearchItems = document.createElement("span");
+  divForSearchItems.appendChild(counterForSearchItems);
+  counterForSearchItems.id = "counter"; */
 }
 
 //it sorts array alphabetically
