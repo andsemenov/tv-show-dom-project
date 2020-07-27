@@ -75,7 +75,12 @@ function renderShow(showList) {
   liRuntimeShow.textContent = showList.runtime;
 
   h1ShowName.addEventListener("click", () => {
+    document.querySelector("body").scrollIntoView();
     renderSearchPanelForEpisodes();
+    //document.querySelector("#search_show").style.display = "none";
+    //document.querySelector("#select_episode").style.display = "block";
+    //document.querySelector("#search_episodes").style.display = "block";
+
     fetchEpisodes(showList.id);
   });
 }
@@ -135,6 +140,8 @@ function renderSearchShow(shows) {
   let divForChooseEpisode = document.createElement("div");
   divSearchRoot.appendChild(divForChooseEpisode);
   divForChooseEpisode.className = "search_item";
+  divForChooseEpisode.id = "select_episode";
+  divForChooseEpisode.style.display = "none";
 
   let labelForChooseEpisode = document.createElement("label");
   divForChooseEpisode.appendChild(labelForChooseEpisode);
@@ -150,6 +157,8 @@ function renderSearchShow(shows) {
   //it creates an input element for searching among episodes
   let divForSearchItems = document.createElement("div");
   divForSearchItems.className = "search_item";
+  divForSearchItems.id = "search_episodes";
+  divForSearchItems.style.display = "none";
   divSearchRoot.appendChild(divForSearchItems);
 
   let labelForSearchItems = document.createElement("label");
@@ -200,62 +209,9 @@ function renderSelect(show) {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function renderSearchPanelForEpisodes() {
-  //document.querySelector("#search_root").innerHTML = "";
   document.querySelector("#search_show").style.display = "none";
-
-  let divSearchRoot = document.querySelector("#search_root");
-  //it creates a select element with list of shows
-  /* let divChooseShow = document.createElement("div");
-  divChooseShow.className = "search_item";
-  divSearchRoot.appendChild(divChooseShow);
-
-  let labelForChooseShow = document.createElement("label");
-  divChooseShow.appendChild(labelForChooseShow);
-  labelForChooseShow.textContent = "Choose a show";
-  labelForChooseShow.htmlFor = "choose_show";
-
-  let selectForChooseShow = document.createElement("select");
-  divChooseShow.appendChild(selectForChooseShow);
-  selectForChooseShow.className = "select";
-  selectForChooseShow.name = "select";
-  selectForChooseShow.id = "choose_show"; */
-
-  //it creates a select element with list of episodes
-  /* let divForChooseEpisode = document.createElement("div");
-  divSearchRoot.appendChild(divForChooseEpisode);
-  divForChooseEpisode.className = "search_item";
-
-  let labelForChooseEpisode = document.createElement("label");
-  divForChooseEpisode.appendChild(labelForChooseEpisode);
-  labelForChooseEpisode.htmlFor = "choose_episode";
-  labelForChooseEpisode.textContent = "Choose an episode";
-
-  let selectForChooseEpisode = document.createElement("select");
-  divForChooseEpisode.appendChild(selectForChooseEpisode);
-  selectForChooseEpisode.className = "select";
-  selectForChooseEpisode.name = "select";
-  selectForChooseEpisode.id = "choose_episode";
-
-  //it creates an input element for searching among episodes
-  let divForSearchItems = document.createElement("div");
-  divForSearchItems.className = "search_item";
-  divSearchRoot.appendChild(divForSearchItems);
-
-  let labelForSearchItems = document.createElement("label");
-  divForSearchItems.appendChild(labelForSearchItems);
-  labelForSearchItems.htmlFor = "search";
-  labelForSearchItems.textContent = "Search episodes";
-
-  let inputForSearchItems = document.createElement("input");
-  divForSearchItems.appendChild(inputForSearchItems);
-  inputForSearchItems.type = "text";
-  inputForSearchItems.id = "search";
-  inputForSearchItems.className = "search";
-  inputForSearchItems.placeholder = "Search episodes";
-
-  let counterForSearchItems = document.createElement("span");
-  divForSearchItems.appendChild(counterForSearchItems);
-  counterForSearchItems.id = "counter"; */
+  document.querySelector("#select_episode").style.display = "block";
+  document.querySelector("#search_episodes").style.display = "block";
 }
 
 //it sorts array alphabetically
@@ -407,7 +363,6 @@ function searchedEpisode(episodeList, code) {
     element.addEventListener("click", () => {
       element.parentNode.removeChild(element);
 
-      // document.querySelector("#search").classList.remove("hidden");
       document
         .querySelectorAll(".episode.hidden")
         .forEach((element) => element.classList.remove("hidden"));
