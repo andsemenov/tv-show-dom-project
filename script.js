@@ -36,6 +36,7 @@ function renderItems(shows, render) {
 //it renders show's elements on page
 function renderShow(showList) {
   let divForEachShow = document.createElement("div");
+  divForEachShow.className = "show_on_page";
   document.querySelector("#root").appendChild(divForEachShow);
 
   let h1ShowName = document.createElement("h1");
@@ -44,35 +45,40 @@ function renderShow(showList) {
   h1ShowName.className = "link-to-episode";
 
   let divForContentShow = document.createElement("div");
+  divForContentShow.className = "info_show";
   divForEachShow.appendChild(divForContentShow);
 
   let imgForShow = document.createElement("img");
-  divForEachShow.appendChild(imgForShow);
+  imgForShow.className = "info";
+  divForContentShow.appendChild(imgForShow);
   //checks if image is null and replaces for spare one
   imgForShow.src = checkIfNullImage(showList, "./src/show_noimage.jpg");
 
   let divForSummary = document.createElement("div");
-  divForEachShow.appendChild(divForSummary);
+  divForSummary.className = "info";
+  divForContentShow.appendChild(divForSummary);
   divForSummary.innerHTML = showList.summary;
 
   let ulForShow = document.createElement("ul");
-  divForEachShow.appendChild(ulForShow);
+  ulForShow.className = "info";
+
+  divForContentShow.appendChild(ulForShow);
 
   let liRatedShow = document.createElement("li");
   ulForShow.appendChild(liRatedShow);
-  liRatedShow.textContent = showList.rating.average;
+  liRatedShow.textContent = "Rated: " + showList.rating.average;
 
   let liGenresShow = document.createElement("li");
   ulForShow.appendChild(liGenresShow);
-  liGenresShow.textContent = showList.genres;
+  liGenresShow.textContent = "Genres: " + showList.genres;
 
   let liStatusShow = document.createElement("li");
   ulForShow.appendChild(liStatusShow);
-  liStatusShow.textContent = showList.status;
+  liStatusShow.textContent = "Status: " + showList.status;
 
   let liRuntimeShow = document.createElement("li");
   ulForShow.appendChild(liRuntimeShow);
-  liRuntimeShow.textContent = showList.runtime;
+  liRuntimeShow.textContent = "Runtime: " + showList.runtime;
 
   h1ShowName.addEventListener("click", () => {
     document.querySelector("body").scrollIntoView();
@@ -177,6 +183,20 @@ function renderSearchShow(shows) {
   divForSearchItems.appendChild(counterForSearchItems);
   counterForSearchItems.id = "counter";
 
+  /////////////////////////////////////////////////////////////////////////////////
+
+  let divForButton = document.createElement("div");
+  divSearchRoot.appendChild(divForButton);
+  divForButton.className = "search_item";
+
+  let buttonAllShows = document.createElement("button");
+  divForButton.appendChild(buttonAllShows);
+  buttonAllShows.id = "back_to_all_shows";
+  //buttonAllShows.className = ".search";
+  buttonAllShows.style.display = "none";
+
+  buttonAllShows.textContent = "Back to All Shows";
+
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   document.querySelector("#search_item_show").addEventListener("input", () => {
@@ -193,7 +213,7 @@ function makeListSelectShow(shows) {
 
   renderItems(shows, renderSelect);
 
-  document.querySelector("#select-show").addEventListener("change", () => {
+  document.querySelector("#select-show").addEventListener("click", () => {
     let showID = document.querySelector("#select-show").value;
     renderSearchPanelForEpisodes();
     fetchEpisodes(showID);
@@ -212,6 +232,13 @@ function renderSearchPanelForEpisodes() {
   document.querySelector("#search_show").style.display = "none";
   document.querySelector("#select_episode").style.display = "block";
   document.querySelector("#search_episodes").style.display = "block";
+  document.querySelector("#back_to_all_shows").style.display = "block";
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  document.querySelector("#back_to_all_shows").addEventListener("click", () => {
+    document.querySelector("#search_root").innerHTML = "";
+    document.querySelector("#root").innerHTML = "";
+    setup();
+  });
 }
 
 //it sorts array alphabetically
@@ -340,7 +367,7 @@ function searchedEpisode(episodeList, code) {
     return element.id == code;
   });
 
-  //document.querySelector("#search").classList.add("hidden");
+  document.querySelector("#search").classList.add("hidden");
   document
     .querySelectorAll(".episode")
     .forEach((element) => element.classList.add("hidden"));
@@ -358,18 +385,19 @@ function searchedEpisode(episodeList, code) {
   document
     .querySelector(".episode:nth-child(" + (index + 1) + ")")
     .append(buttonReturnEpisodes);
-
   document.querySelectorAll(".button_return_episodes").forEach((element) =>
     element.addEventListener("click", () => {
       element.parentNode.removeChild(element);
 
+      document.querySelector("#search").classList.remove("hidden");
       document
         .querySelectorAll(".episode.hidden")
         .forEach((element) => element.classList.remove("hidden"));
-      // document.querySelector("#choose_episode").value = episodeList[0].id;
-      document.querySelector("body").scrollIntoView();
+      document.querySelector("#choose_episode").value = episodeList[0].id;
+      document.querySelector("#search_root").scrollIntoView();
     })
   );
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 window.onload = setup;
