@@ -384,7 +384,6 @@ function searchedEpisode(episodeList, code) {
 
   buttonReturnEpisodes.textContent = "Return all episodes";
   buttonReturnEpisodes.className = "button_return_episodes";
-  buttonReturnEpisodes.id = `${Date.now()}`;
 
   visibleEpisode.append(buttonReturnEpisodes);
   buttonReturnEpisodes.addEventListener("click", () => {
