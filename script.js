@@ -354,20 +354,19 @@ function selectEpisode(episodeList) {
   });
   //it waits when episode will be selected/////////////////////////////////////////////////////////////////////////////////
   document.querySelector("#choose_episode").addEventListener("change", () => {
-    searchedEpisode(
+    let index = searchedEpisode(
       episodeList,
       document.querySelector("#choose_episode").value
     );
+
+    episodeGen(index);
   });
+  ///////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////
 }
 
-//it find the index of selected episode in array
-function searchedEpisode(episodeList, code) {
-  let index = episodeList.findIndex((element) => {
-    return element.id == code;
-  });
-
-  // document.querySelector("#search").classList.add("hidden");
+function episodeGen(index) {
   document
     .querySelectorAll(".episode")
     .forEach((element) => element.classList.add("hidden"));
@@ -390,12 +389,19 @@ function searchedEpisode(episodeList, code) {
     document
       .querySelectorAll(".episode.hidden")
       .forEach((element) => element.classList.remove("hidden"));
-    document.querySelector("#choose_episode").value = episodeList[0].id;
+
     document.querySelector("#search_root").scrollIntoView();
 
     visibleEpisode.removeChild(buttonReturnEpisodes);
   });
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//it find the index of selected episode in array
+function searchedEpisode(episodeList, code) {
+  let index = episodeList.findIndex((element) => {
+    return element.id == code;
+  });
+  return index;
+}
 
 window.onload = setup;
