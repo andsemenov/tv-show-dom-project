@@ -367,36 +367,35 @@ function searchedEpisode(episodeList, code) {
     return element.id == code;
   });
 
-  document.querySelector("#search").classList.add("hidden");
+  // document.querySelector("#search").classList.add("hidden");
   document
     .querySelectorAll(".episode")
     .forEach((element) => element.classList.add("hidden"));
-  document
-    .querySelector(".episode.hidden:nth-child(" + (index + 1) + ")")
-    .classList.remove("hidden");
 
-  document
-    .querySelector(".episode:nth-child(" + (index + 1) + ")")
-    .scrollIntoView();
+  let visibleEpisode = document.querySelector(
+    ".episode:nth-child(" + (index + 1) + ")"
+  );
+
+  visibleEpisode.classList.remove("hidden");
+
+  visibleEpisode.scrollIntoView();
+
   let buttonReturnEpisodes = document.createElement("button");
 
   buttonReturnEpisodes.textContent = "Return all episodes";
   buttonReturnEpisodes.className = "button_return_episodes";
-  document
-    .querySelector(".episode:nth-child(" + (index + 1) + ")")
-    .append(buttonReturnEpisodes);
-  document.querySelectorAll(".button_return_episodes").forEach((element) =>
-    element.addEventListener("click", () => {
-      element.parentNode.removeChild(element);
+  buttonReturnEpisodes.id = `${Date.now()}`;
 
-      document.querySelector("#search").classList.remove("hidden");
-      document
-        .querySelectorAll(".episode.hidden")
-        .forEach((element) => element.classList.remove("hidden"));
-      document.querySelector("#choose_episode").value = episodeList[0].id;
-      document.querySelector("#search_root").scrollIntoView();
-    })
-  );
+  visibleEpisode.append(buttonReturnEpisodes);
+  buttonReturnEpisodes.addEventListener("click", () => {
+    document
+      .querySelectorAll(".episode.hidden")
+      .forEach((element) => element.classList.remove("hidden"));
+    document.querySelector("#choose_episode").value = episodeList[0].id;
+    document.querySelector("#search_root").scrollIntoView();
+
+    visibleEpisode.removeChild(buttonReturnEpisodes);
+  });
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
