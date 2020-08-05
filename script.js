@@ -367,7 +367,7 @@ function selectEpisode(episodeList) {
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   //it waits when episode will be selected
-  document.querySelector("#choose_episode").addEventListener("change", () => {
+  document.querySelector("#choose_episode").addEventListener("click", () => {
     ///////////////////////////////////////////////////////////////////////////////////
     let index = searchedEpisode(
       episodeList,
