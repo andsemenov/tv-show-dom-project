@@ -213,33 +213,22 @@ function makeListSelectShow(shows) {
 
   renderItems(shows, renderSelect);
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  document.querySelector("#select-show").addEventListener("click", () => {
+    ////////////////////////////////////////////////////////////////////////////////////////
+    const oldEpisodeSelector = document.querySelector("#choose_episode");
+    console.log(oldEpisodeSelector);
+    let newEpisodeSelector = oldEpisodeSelector.cloneNode(false);
+    console.log(newEpisodeSelector);
+    oldEpisodeSelector.parentNode.replaceChild(
+      newEpisodeSelector,
+      oldEpisodeSelector
+    );
+    //////////////////////////////////////////////////////////////////////////////////////////
 
-  document
-    .querySelector("#select-show")
-    .addEventListener("touchstart", handleSelectShow);
-  document
-    .querySelector("#select-show")
-    .addEventListener("click", handleSelectShow);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
-}
-
-function handleSelectShow(evt) {
-  evt.preventDefault();
-  ////////////////////////////////////////////////////////////////////////////////////////
-  const oldEpisodeSelector = document.querySelector("#choose_episode");
-  console.log(oldEpisodeSelector);
-  let newEpisodeSelector = oldEpisodeSelector.cloneNode(false);
-  console.log(newEpisodeSelector);
-  oldEpisodeSelector.parentNode.replaceChild(
-    newEpisodeSelector,
-    oldEpisodeSelector
-  );
-  //////////////////////////////////////////////////////////////////////////////////////////
-
-  let showID = document.querySelector("#select-show").value;
-  renderSearchPanelForEpisodes();
-  fetchEpisodes(showID);
+    let showID = document.querySelector("#select-show").value;
+    renderSearchPanelForEpisodes();
+    fetchEpisodes(showID);
+  });
 }
 
 function renderSelect(show) {
@@ -378,7 +367,7 @@ function selectEpisode(episodeList) {
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   //it waits when episode will be selected
-  document.querySelector("#choose_episode").addEventListener("click", () => {
+  document.querySelector("#choose_episode").addEventListener("change", () => {
     ///////////////////////////////////////////////////////////////////////////////////
     let index = searchedEpisode(
       episodeList,
@@ -387,7 +376,14 @@ function selectEpisode(episodeList) {
     console.log("selectEpisode", index);
     console.log("selectEpisode", episodeList);
     ///////////////////////////////////////////////////////////////////////////////////////
-
+    const oldEpisodeSelector = document.querySelector("#choose_episode");
+    console.log(oldEpisodeSelector);
+    let newEpisodeSelector = oldEpisodeSelector.cloneNode(false);
+    console.log(newEpisodeSelector);
+    oldEpisodeSelector.parentNode.replaceChild(
+      newEpisodeSelector,
+      oldEpisodeSelector
+    );
     ///////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////
