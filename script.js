@@ -213,10 +213,6 @@ function makeListSelectShow(shows) {
 
   renderItems(shows, renderSelect);
 
-  document
-    .querySelector("#select-show")
-    .addEventListener("click", handleSelectShow);
-
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   document
