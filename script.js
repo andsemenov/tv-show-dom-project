@@ -214,6 +214,17 @@ function makeListSelectShow(shows) {
   renderItems(shows, renderSelect);
 
   document.querySelector("#select-show").addEventListener("click", () => {
+    ////////////////////////////////////////////////////////////////////////////////////////
+    const oldEpisodeSelector = document.querySelector("#choose_episode");
+    console.log(oldEpisodeSelector);
+    let newEpisodeSelector = oldEpisodeSelector.cloneNode(false);
+    console.log(newEpisodeSelector);
+    oldEpisodeSelector.parentNode.replaceChild(
+      newEpisodeSelector,
+      oldEpisodeSelector
+    );
+    //////////////////////////////////////////////////////////////////////////////////////////
+
     let showID = document.querySelector("#select-show").value;
     renderSearchPanelForEpisodes();
     fetchEpisodes(showID);
@@ -352,18 +363,30 @@ function selectEpisode(episodeList) {
       "E".concat(String(episode.number).padStart(2, 0))
     } - ${episode.name}`;
   });
-  //it waits when episode will be selected/////////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  //it waits when episode will be selected
   document.querySelector("#choose_episode").addEventListener("change", () => {
+    ///////////////////////////////////////////////////////////////////////////////////
     let index = searchedEpisode(
       episodeList,
       document.querySelector("#choose_episode").value
     );
+    console.log("selectEpisode", index);
+    console.log("selectEpisode", episodeList);
+    ///////////////////////////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////
     episodeGen(index);
-  });
-  ///////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    selectEpisode(episodeList);
+    //////////////////////////////////////////////////////////////////////
 
-  /////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////
+  });
 }
 
 function episodeGen(index) {
@@ -398,9 +421,12 @@ function episodeGen(index) {
 
 //it find the index of selected episode in array
 function searchedEpisode(episodeList, code) {
+  console.log("searchEpisode", episodeList);
+  console.log("searchEpisode", code);
   let index = episodeList.findIndex((element) => {
     return element.id == code;
   });
+
   return index;
 }
 
