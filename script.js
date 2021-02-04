@@ -221,10 +221,10 @@ function makeListSelectShow(shows) {
   //document.querySelector("#select-show").innerHTML = "rrrrrrrrrrrrrrrr";
   document.querySelector("#select-show").innerHTML = "";
   ///////////////////////////////////////////////////////////////
-  const invitationSelectShows = document.createElement("option");
+  const invitationSelectShow = document.createElement("option");
 
-  document.querySelector("#select-show").appendChild(invitationSelectShows);
-  invitationSelectShows.textContent = "Select a show";
+  document.querySelector("#select-show").appendChild(invitationSelectShow);
+  invitationSelectShow.textContent = "Select a show";
   /////////////////////
 
   renderItems(shows, renderSelect);
@@ -381,6 +381,14 @@ function renderEpisode(episode) {
 //it renders select element on the page
 function selectEpisode(episodeList) {
   document.querySelector("#choose_episode").innerHTML = "";
+  //
+  const invitationSelectEpisode = document.createElement("option");
+
+  document
+    .querySelector("#choose_episode")
+    .appendChild(invitationSelectEpisode);
+  invitationSelectEpisode.textContent = "Select a episode";
+  //
 
   episodeList.forEach((episode) => {
     let selectElement = document.createElement("option");
