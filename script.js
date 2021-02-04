@@ -140,6 +140,7 @@ function renderSearchShow(shows) {
   selectSelectShow.className = "select";
   selectSelectShow.name = "select";
   labelSelectShow.htmlFor = "select-show";
+  ////////////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -217,18 +218,25 @@ function renderSearchShow(shows) {
 
 //it renders page with shows
 function makeListSelectShow(shows) {
+  //document.querySelector("#select-show").innerHTML = "rrrrrrrrrrrrrrrr";
   document.querySelector("#select-show").innerHTML = "";
+  ///////////////////////////////////////////////////////////////
+  const invitationSelectShows = document.createElement("option");
+
+  document.querySelector("#select-show").appendChild(invitationSelectShows);
+  invitationSelectShows.textContent = "Select a show";
+  /////////////////////
 
   renderItems(shows, renderSelect);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  /*   document
+    .querySelector("#select-show")
+    .addEventListener("touchstart", handleSelectShow); */
   document
     .querySelector("#select-show")
-    .addEventListener("touchstart", handleSelectShow);
-  document
-    .querySelector("#select-show")
-    .addEventListener("click", handleSelectShow);
+    .addEventListener("change", handleSelectShow); ///not forget replace click for change
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -373,6 +381,7 @@ function renderEpisode(episode) {
 //it renders select element on the page
 function selectEpisode(episodeList) {
   document.querySelector("#choose_episode").innerHTML = "";
+
   episodeList.forEach((episode) => {
     let selectElement = document.createElement("option");
 
