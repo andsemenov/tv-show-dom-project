@@ -49,15 +49,10 @@ function renderShow(showList) {
   divForEachShow.appendChild(divForContentShow);
 
   let imgForShow = document.createElement("img");
-  imgForShow.className = "info";
+  imgForShow.className = "image";
   divForContentShow.appendChild(imgForShow);
   //checks if image is null and replaces for spare one
   imgForShow.src = checkIfNullImage(showList, "./src/show_noimage.jpg");
-
-  let divForSummary = document.createElement("div");
-  divForSummary.className = "info";
-  divForContentShow.appendChild(divForSummary);
-  divForSummary.innerHTML = showList.summary;
 
   let ulForShow = document.createElement("ul");
   ulForShow.className = "info";
@@ -79,6 +74,11 @@ function renderShow(showList) {
   let liRuntimeShow = document.createElement("li");
   ulForShow.appendChild(liRuntimeShow);
   liRuntimeShow.textContent = "Runtime: " + showList.runtime;
+
+  let divForSummary = document.createElement("div");
+  divForSummary.className = "description";
+  divForContentShow.appendChild(divForSummary);
+  divForSummary.innerHTML = showList.summary;
 
   h1ShowName.addEventListener("click", () => {
     document.querySelector("body").scrollIntoView();
@@ -299,6 +299,7 @@ function searchResultRender(episodeList) {
       searchEpisodes(episodeList, stringSearch).length
     }/${episodeList.length} episodes`;
     makePageForEpisodes(searchEpisodes(episodeList, stringSearch));
+    selectEpisode(searchEpisodes(episodeList, stringSearch));
   });
 }
 
