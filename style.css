@@ -114,7 +114,6 @@ html {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  /*  align-items: center; */
 }
 
 #back-to-all-shows {
@@ -188,6 +187,9 @@ html {
   }
   .link-to-episode {
     text-align: center;
+  }
+  .show-on-page {
+    border-radius: 10px;
   }
 }
 
