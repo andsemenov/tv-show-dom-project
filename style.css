@@ -36,7 +36,7 @@ html {
   margin: 10px;
 }
 
-.search_item {
+.search-item {
   width: 22%;
   display: flex;
   flex-direction: column;
@@ -114,9 +114,10 @@ html {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  /*  align-items: center; */
 }
 
-#back_to_all_shows {
+#back-to-all-shows {
   margin: 8px;
   display: block;
   border: 1px solid #ccc;
@@ -130,7 +131,7 @@ html {
   padding-bottom: 12px;
 }
 
-.button_return_episodes {
+.button-return-episodes {
   margin: 10px;
   padding: 5px;
   border-radius: 4px;
@@ -150,10 +151,6 @@ html {
   flex-direction: column;
 }
 
-/* .info li {
-  display: flex;
-}
- */
 @media screen and (max-width: 850px) {
   #root {
     margin: auto;
@@ -161,7 +158,7 @@ html {
   .episode {
     width: calc((100% - 20px) / 2);
   }
-  .search_item {
+  .search-item {
     width: 40%;
     display: flex;
     flex-wrap: wrap;
@@ -174,9 +171,13 @@ html {
   }
   .search,
   .select,
-  .search_item,
-  #back_to_all_shows {
+  .search-item,
+  #back-to-all-shows {
     width: 90%;
+  }
+
+  .info-show {
+    justify-content: space-around;
   }
 
   .description {
@@ -184,6 +185,9 @@ html {
   }
   .description p {
     margin: 10px 0 10px 0;
+  }
+  .link-to-episode {
+    text-align: center;
   }
 }
 
@@ -196,19 +200,12 @@ html {
     width: 100%;
   }
   .link-to-episode {
-    text-align: center;
     font-size: 1.5em;
     margin-left: 0;
   }
 
-  .info-show .image {
+  .info-show > img {
+    max-width: 80vw;
     align-self: center;
-  }
-
-  .info-show .info {
-    padding-left: auto;
-  }
-  .image {
-    width: 80vw;
   }
 }
