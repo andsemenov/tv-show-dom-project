@@ -1,5 +1,7 @@
 # tv-show-dom-project
 
+To launch the application, it needs to run index.html
+
 The goal of the project was learning of the following topics:
 
 - JS and the DOM
