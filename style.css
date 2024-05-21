@@ -42,6 +42,11 @@ html {
   flex-direction: column;
   padding: 1%;
 }
+
+.search-item label {
+  margin-left: 10px;
+}
+
 .episode {
   border-radius: 5px;
 }
